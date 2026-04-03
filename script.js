@@ -13,7 +13,7 @@ const CONFIG = {
     VERSION: '1.0.0',
     QUALITY: 'medium',
     PERFORMANCE_TARGET: 90, // FPS
-    ASSET_TIMEOUT: 60000, // ms
+    ASSET_TIMEOUT: 30000, // ms
     DEBUG_MODE: false,
     AUTO_QUALITY: true
 };
