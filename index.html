@@ -34,7 +34,7 @@
         <!-- ============================================ -->
         <!-- ASSET MANAGEMENT - All Models & Textures -->
         <!-- ============================================ -->
-        <a-assets timeout="30000">
+        <a-assets timeout="60000">
             <!-- 3D Models -->
             <a-asset-item id="beach-ball-model" src="assets/models/beach_ball.glb"></a-asset-item>
             <a-asset-item id="bed-model" src="assets/models/Bed.glb"></a-asset-item>
@@ -70,13 +70,54 @@
             <a-asset-item id="Water-Tower-model" src="assets/models/Water_Tower.glb"></a-asset-item>
             <a-asset-item id="Ceiling-Fan-model" src="assets/models/Ceiling_Fan.glb"></a-asset-item>
             <!-- Textures - Color Maps -->
-            <img id="brick-color" src="assets/texture/Bricks058_1K-JPG/Bricks058_1K-JPG_Color.jpg">
-            <img id="grass-color" src="assets/texture/Grass008_1K-JPG/Grass008_1K-JPG_Color.jpg">
-            <img id="tiles-075-color" src="assets/texture/Tiles075_1K-JPG/Tiles075_1K-JPG_Color.jpg">
-            <img id="tiles-133-color" src="assets/texture/Tiles133A_1K-JPG/Tiles133A_1K-JPG_Color.jpg">
+            <a-plane 
+    id="ground" 
+    position="0 0 0" 
+    rotation="-90 0 0" 
+    width="200" 
+    height="200" 
+    color="#22aa22" 
+    static-body
+    shadow="receive: true">
+</a-plane>
+            <a-entity id="villa" position="0 0 0">
+    <a-box 
+        id="main-building" 
+        position="0 4 -2" 
+        width="30" 
+        height="1" 
+        depth="15" 
+        color="#000000"
+        static-body
+        shadow="cast: true; receive: true">
+    </a-box>
+        <a-entity id="living-room" position="-5 0 0">
+        <a-plane 
+            position="-1.2 0.02 0" 
+            rotation="-90 0 0" 
+            width="9" 
+            height="6" 
+            color="#000000"
+            static-body
+            shadow="receive: true">
+        </a-plane>
+            <a-box position="-0.9 2 3" width="8" height="5" depth="0.2" color="#000000" static-body></a-box>
+        <a-box position="-4.5 2 -0.6" width="2.6" height="5" depth="6.7" color="#000000" static-body></a-box>
+        <a-box position="-1 2 -2.9" width="8" height="5" depth="0.2" color="#000000" static-body></a-box>
+    </a-entity>
 
-
-        
+    <a-entity id="bedroom" position="5 0 0">
+        <a-plane 
+            position="-1.7 0.02 -0.3" 
+            rotation="-90 0 0" 
+            width="13" 
+            height="6.7" 
+            color="#000000"
+            static-body>
+        </a-plane>
+        <a-box position="0.8 2 2.9" width="8" height="4" depth="0.2" color="#000000" static-body></a-box>
+    </a-entity>
+</a-entity>
          
         </a-assets>
 
