@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="VR Dream Villa Experience - A luxurious virtual reality villa with professional 3D models and textures">
+    <meta name="theme-color" content="#667eea">
+    <title>VR Dream Villa Experience | Immersive Virtual Reality</title>
+    
+       
+    <!-- Physics System -->
+   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+    <!-- Environment Component -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
+    
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">
+            <h1>🏠 Dream Villa Loading</h1>
+            <p>Experience luxury in virtual reality</p>
+            <div class="loading-bar">
+                <div class="loading-bar-fill"></div>
+            </div>
+            <p id="loadingStatus">Initializing scene...</p>
+        </div>
+    </div>
+
+    <!-- A-Frame Scene -->
+    <a-scene physics="debug: false; gravity: -9.8" background="color: #87ceeb" fog="type: exponential; color: #87ceeb; density: 0.002">
+        
+        <!-- ============================================ -->
+        <!-- ASSET MANAGEMENT - All Models & Textures -->
+        <!-- ============================================ -->
+        <a-assets timeout="30000">
+            <!-- 3D Models -->
+            <a-asset-item id="beach-ball-model" src="assets/models/beach_ball.glb"></a-asset-item>
+            <a-asset-item id="bed-model" src="assets/models/Bed.glb"></a-asset-item>
+            <a-asset-item id="car-model" src="assets/models/CAR_Model.glb"></a-asset-item>
+            <a-asset-item id="couch-model" src="assets/models/Couch.glb"></a-asset-item>
+            <a-asset-item id="door-double-model" src="assets/models/Door_Double.glb"></a-asset-item>
+            <a-asset-item id="doorway-front-model" src="assets/models/Doorway_Front.glb"></a-asset-item>
+            <a-asset-item id="tv-model" src="assets/models/Flat-screen_TV.glb"></a-asset-item>
+            <a-asset-item id="lounger-model" src="assets/models/Garden_Lounger.glb"></a-asset-item>
+            <a-asset-item id="fridge-model" src="assets/models/Kitchen_Fridge_Large.glb"></a-asset-item>
+            <a-asset-item id="stove-model" src="assets/models/Kitchen_Stove.glb"></a-asset-item>
+            <a-asset-item id="lamppost-model" src="assets/models/Lamp_post.glb"></a-asset-item>
+            <a-asset-item id="light-stand-model" src="assets/models/Light_Stand.glb"></a-asset-item>
+            <a-asset-item id="motorcycle-model" src="assets/models/Motorcycle_Suzuki_SV650.glb"></a-asset-item>
+            <a-asset-item id="rubber-duck-model" src="assets/models/Rubber_Duck_Pool_Toy.glb"></a-asset-item>
+            <a-asset-item id="desk-model" src="assets/models/Standing_Desk.glb"></a-asset-item>
+            <a-asset-item id="sink-model" src="assets/models/Steel_Sink_Kitchen_Cabinet.glb"></a-asset-item>
+            <a-asset-item id="tree-model" src="assets/models/Tree.glb"></a-asset-item>
+            <a-asset-item id="trees-model" src="assets/models/Trees.glb"></a-asset-item>
+            <a-asset-item id="wall-art-01-model" src="assets/models/Wall_Art_01.glb"></a-asset-item>
+            <a-asset-item id="Cabinet-Shelves-model" src="assets/models/Cabinet_Shelves.glb"></a-asset-item>
+            <a-asset-item id="Chair-model" src="assets/models/Chair.glb"></a-asset-item>
+            <a-asset-item id="Little-Bookcase-model" src="assets/models/Little_Bookcase.glb"></a-asset-item>
+            <a-asset-item id="Vertical-Cubby-Shelf-model" src="assets/models/Vertical_Cubby_Shelf.glb"></a-asset-item>
+            <a-asset-item id="Window2-black-open-1731-model" src="assets/models/Window2_black_open_1731.glb"></a-asset-item>
+            <a-asset-item id="Dining-Set-model" src="assets/models/Dining_Set.glb"></a-asset-item>
+            <a-asset-item id="Garden-model" src="assets/models/Garden.glb"></a-asset-item>
+            <a-asset-item id="Gazebo-model" src="assets/models/Gazebo.glb"></a-asset-item>
+            <a-asset-item id="Garbage-model" src="assets/models/Garbage.glb"></a-asset-item>
+            <a-asset-item id="Path-Straight-model" src="assets/models/Path_Straight.glb"></a-asset-item>
+            <a-asset-item id="Park-Bench-model" src="assets/models/Park_Bench.glb"></a-asset-item>
+            <a-asset-item id="Picnic-Table-model" src="assets/models/Picnic_Table.glb"></a-asset-item>
+            <a-asset-item id="Water-Tower-model" src="assets/models/Water_Tower.glb"></a-asset-item>
+            <a-asset-item id="Ceiling-Fan-model" src="assets/models/Ceiling_Fan.glb"></a-asset-item>
+            <!-- Textures - Color Maps -->
+            <img id="brick-color" src="assets/texture/Bricks058_1K-JPG/Bricks058_1K-JPG_Color.jpg">
+            <img id="grass-color" src="assets/texture/Grass008_1K-JPG/Grass008_1K-JPG_Color.jpg">
+            <img id="tiles-075-color" src="assets/texture/Tiles075_1K-JPG/Tiles075_1K-JPG_Color.jpg">
+            <img id="tiles-133-color" src="assets/texture/Tiles133A_1K-JPG/Tiles133A_1K-JPG_Color.jpg">
+
+
+        
+            <!-- Textures - Normal Maps -->
+            <img id="brick-normal" src="assets/texture/Bricks058_1K-JPG/Bricks058_1K-JPG_NormalGL.jpg">
+            <img id="grass-normal" src="assets/texture/Grass008_1K-JPG/Grass008_1K-JPG_NormalGL.jpg">
+            <img id="tiles-075-normal" src="assets/texture/Tiles075_1K-JPG/Tiles075_1K-JPG_NormalGL.jpg">
+            <img id="tiles-133-normal" src="assets/texture/Tiles133A_1K-JPG/Tiles133A_1K-JPG_NormalGL.jpg">
+        </a-assets>
+
+        <!-- ============================================ -->
+        <!-- CAMERA & CONTROLS -->
+        <!-- ============================================ -->
+        <a-entity id="rig" position="0 0 0">
+            <a-camera 
+                position="0 1.6 0" 
+                look-controls="pointerLockEnabled: true" 
+                wasd-controls="acceleration: 100">
+            </a-camera>
+        </a-entity>
+
+        <!-- ============================================ -->
+        <!-- LIGHTING SYSTEM -->
+        <!-- ============================================ -->
+        <a-light id="ambient-light" type="ambient" color="#fff" intensity="0.7"></a-light>
+        <a-light id="sun-light" type="directional" color="#fff" intensity="0.9" position="15 20 15"></a-light>
+        <!-- ============================================ -->
+        <!-- SKY -->
+        <!-- ============================================ -->
+        <a-sky id="sky" color="#87ceeb"></a-sky>
+
+        <!--  cloud entities -->
+<a-entity id="cloud1" position="-10 12 -40"
+        animation="property: position; to: 20 12 -40; dur: 40000; easing: linear; loop: true">
+  <a-sphere radius="2" color="#fff" position="0 0 0"></a-sphere>
+  <a-sphere radius="1.5" color="#fff" position="1.9 0.3 0"></a-sphere>
+  <a-sphere radius="1" color="#fff" position="-1.7 0.2 0.2"></a-sphere>
+</a-entity>
+
+<a-entity id="cloud2" position="30 14 -35"
+        animation="property: position; to: -20 14 -35; dur: 60000; easing: linear; loop: true">
+  <a-sphere radius="2" color="#fff" position="0 0 0"></a-sphere>
+  <a-sphere radius="1.1" color="#fff" position="2 0.4 0"></a-sphere>
+  <a-sphere radius="1.6" color="#fff" position="-1.5 0.1 -0.1"></a-sphere>
+</a-entity>
+
+<a-entity id="cloud3" position="-30 14 35"
+        animation="property: position; to: 20 14 35; dur: 60000; easing: linear; loop: true">
+  <a-sphere radius="2" color="#fff" position="0 0 0"></a-sphere>
+  <a-sphere radius="1.1" color="#fff" position="-2 0.4 -0"></a-sphere>
+  <a-sphere radius="1.6" color="#fff" position="1.5 0.1 0.1"></a-sphere>
+</a-entity>
+
+<a-entity id="cloud4" position="10 12 40"
+        animation="property: position; to: -20 12 40; dur: 40000; easing: linear; loop: true">
+  <a-sphere radius="2.5" color="#fff" position="0 0 0"></a-sphere>
+  <a-sphere radius="1.6" color="#fff" position="-1.9 0.3 0"></a-sphere>
+  <a-sphere radius="1" color="#fff" position="1.7 0.2 -0.2"></a-sphere>
+</a-entity>
+
+
+
+        <!-- ============================================ -->
+        <!-- GROUND WITH GRASS TEXTURE -->
+        <!-- ============================================ -->
+       <!-- GROUND WITH GRASS TEXTURE -->
+<a-plane 
+    id="ground" 
+    position="0 0 0" 
+    rotation="-90 0 0" 
+    width="200" 
+    height="200" 
+    material="color: #22aa22; roughness: 0.8; metalness: 0;"
+    static-body
+    shadow="receive: true">
+</a-plane>
+
+        <!-- ============================================ -->
+        <!-- MAIN VILLA BUILDING (COMPACT) -->
+        <!-- ============================================ -->
+        <a-entity id="villa" position="0 0 0">
+            <!-- Main Structure -->
+            <a-box 
+                id="main-building" 
+                position="0 4 -2" 
+                width="30" 
+                height="1" 
+                depth="15" 
+                material="src: #brick-color; repeat: 2 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+
+            
+           
+
+            <!-- Front Entrance -->
+            <a-entity 
+                position="1.5 0 2.8" 
+                rotation="0 60 0"
+                scale="4 3.4 1.6">
+                <a-entity 
+                    gltf-model="#doorway-front-model"
+                    shadow="cast: true; receive: false">
+                </a-entity>
+            </a-entity>
+        </a-entity>
+
+       
+        
+
+        <!-- ============================================ -->
+        <!-- ROOM 1: LIVING ROOM (INSIDE VILLA) -->
+        <!-- ============================================ -->
+        <a-entity id="living-room" position="-5 0 0">
+            <!-- Floor -->
+            <a-plane 
+                position="-1.2 0.02 0" 
+                rotation="-90 0 0" 
+                width="9" 
+                height="6" 
+                material="src: #tiles-075-color; repeat: 2 1.5; roughness: 0.6; metalness: 0;"
+                static-body
+                shadow="receive: true">
+            </a-plane>
+
+            <!-- Walls -->
+            <a-box 
+                position="-0.9 2 3" 
+                width="8" 
+                height="5" 
+                depth="0.2" 
+                material="src: #brick-color; repeat: 2 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+            <a-box 
+                position="-4.5 2 -0.6" 
+                width="-2.6" 
+                height="5" 
+                depth="6.7" 
+                material="src: #brick-color; repeat: 2 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+             <a-box 
+                position="-1 2 -2.9" 
+                width="8" 
+                height="5" 
+                depth="0.2" 
+                material="src: #brick-color; repeat: 2 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+           
+          <!-- window  --> 
+            <a-entity
+    gltf-model="#Window2-black-open-1731-model"
+    position="-2.5 2.5 3.4"
+    rotation="180 0 0"
+    scale="1 0.7 1"
+    shadow="cast: true; receive: true">
+</a-entity>
+        </a-entity>
+    
+
+            <!-- Couch (SCALED DOWN) -->
+            <a-entity 
+                position="-05 0.3 -0.5" 
+                rotation="0 -60 0"
+                scale="0.9 0.9 0.9"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#couch-model"></a-entity>
+            </a-entity>
+
+            <!-- TV (SCALED DOWN) -->
+            <a-entity 
+                position="-8 0.6 -1" 
+                scale="0.8 0.8 0.8"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#tv-model"></a-entity>
+            </a-entity>
+
+           <a-entity 
+                position="-8 0.4 2.5" 
+                scale="0.8 0.8 0.8"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Little-Bookcase-model"></a-entity>
+            </a-entity>
+
+            <a-entity 
+                position="-4 1 2.5" 
+                scale="0.8 0.8 0.8"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Vertical-Cubby-Shelf-model"></a-entity>
+            </a-entity>
+
+             <a-entity 
+                position="-8 0.4 -1" 
+                rotation="0 90 0"
+                scale="0.4 0.4 0.4"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Cabinet-Shelves-model"></a-entity>
+            </a-entity>
+
+
+
+            <!-- Wall Art (SCALED DOWN) -->
+            <a-entity 
+                position="-5 1.8 2.8" 
+                scale="0.5 0.5 0.5"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#wall-art-01-model"></a-entity>
+            </a-entity>
+            <a-entity 
+                position="-3 1.8 2.8" 
+                scale="0.5 0.5 0.5"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#wall-art-01-model"></a-entity>
+            </a-entity>
+
+            <!-- Light Stand (SCALED DOWN) -->
+            <a-entity 
+                position="-6 0.2 1" 
+                scale="0.6 0.6 0.6"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#light-stand-model"></a-entity>
+            </a-entity>
+            <a-light type="point" color="#ffeb3b" intensity="0.6" position="3 1.2 -0.5"></a-light>
+
+
+             <!-- fan -->
+            <a-entity 
+                position="-3 3 0" 
+                scale="1.5 1.5 1.5"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Ceiling-Fan-model"></a-entity>
+            </a-entity>
+
+            <!-- Ceiling Light -->
+            <a-cylinder 
+                position="-4 3.0 0" 
+                radius="0.3" 
+                height="0.1" 
+                color="#e0e0e0" 
+                static-body>
+            </a-cylinder>
+           <a-light type="point" color="#fff" intensity="0.7" position="0 3.7 0"></a-light>
+        </a-entity>
+
+        <!-- ============================================ -->
+        <!-- ROOM 2: BEDROOM (INSIDE VILLA) -->
+        <!-- ============================================ -->
+        <a-entity id="bedroom" position="5 0 0">
+            <!-- Floor -->
+            <a-plane 
+                position="-1.7 0.02 -0.3" 
+                rotation="-90 0 0" 
+                width="13" 
+                height="6.7" 
+                material="src: #tiles-075-color; repeat: 2 1.5; roughness: 0.5; metalness: 0;"
+                static-body
+                shadow="receive: true">
+            </a-plane>
+
+
+            <!-- Walls -->
+            <a-box 
+                position="0.8 2 2.9" 
+                width="8" 
+                height="4" 
+                depth="0.2" 
+                material="src: #brick-color; repeat: 2 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+            <a-box 
+                position="0.3 2 -2.5" 
+                width="9" 
+                height="3.4" 
+                depth="0.2" 
+                material="src: #brick-color; repeat: 2 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+
+             <a-box 
+                position="4.6 2 0" 
+                width="0.3" 
+                height="5" 
+                depth="6" 
+                material="src: #brick-color; repeat: 2 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+
+                 <!-- window  --> 
+ <a-entity
+    position="2.5 2.5 3.4"
+    rotation="180 0 0"
+    scale="1 0.7 1"
+    shadow="cast: true; receive: true">
+<a-entity gltf-model="#Window2-black-open-1731-model"></a-entity>
+        </a-entity>
+    
+        <a-entity
+    position="5 2.5 1.1"
+    rotation="180 90 0"
+    scale="1 0.7 1"
+    shadow="cast: true; receive: true">
+<a-entity gltf-model="#Window2-black-open-1731-model"></a-entity>
+        </a-entity>
+    
+
+           
+            <!-- Bed (SCALED DOWN) -->
+            <a-entity 
+                position="-5.5 0.3 5" 
+                scale="0.02 0.02 0.02"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#bed-model"></a-entity>
+            </a-entity>
+
+            <!-- Desk (SCALED DOWN) -->
+            <a-entity 
+                position="-2 0.3 5" 
+                rotation="0 0 0"
+                scale="0.8 0.8 0.8"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#desk-model"></a-entity>
+            </a-entity>
+
+            <!-- Chair -->
+            <a-entity 
+                position="-12 0 5" 
+                scale="0.03 0.03 0.03"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Chair-model"></a-entity>
+            </a-entity>
+
+             
+             <!-- fan -->
+            <a-entity 
+                position="-1 3 0" 
+                scale="1.5 1.5 1.5"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Ceiling-Fan-model"></a-entity>
+            </a-entity>
+           
+           
+
+            <!-- Bedside Lights (SCALED DOWN) -->
+            <a-entity 
+                position="-3 0.2 2.3" 
+                scale="0.6 0.6 0.6"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#light-stand-model"></a-entity>
+            </a-entity>
+            <a-light type="point" color="#ffeb3b" intensity="0.5" position="-3 1 -0.5"></a-light>
+            
+            <a-entity 
+                position="2.6 0.2 2.3" 
+                scale="0.6 0.6 0.6"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#light-stand-model"></a-entity>
+            </a-entity>
+            <a-light type="point" color="#ffeb3b" intensity="0.5" position="3 1 -0.5"></a-light>
+
+            <!-- Ceiling Light -->
+            <a-cylinder 
+                position="0 3.0 0" 
+                radius="0.3" 
+                height="0.1" 
+                color="#e0e0e0" 
+                static-body>
+            </a-cylinder>
+            <a-light type="point" color="#fff" intensity="0.7" position="0 3.7 0"></a-light>
+        </a-entity>
+
+        <!-- ============================================ -->
+        <!-- ROOM 3: KITCHEN (INSIDE VILLA) -->
+        <!-- ============================================ -->
+        <a-entity id="kitchen" position="0 0 -7">
+            <!-- Floor -->
+            <a-plane 
+                position="0 0.02 2" 
+                rotation="-90 0 0" 
+                width="12" 
+                height="6.5" 
+                material="src: #tiles-075-color; repeat: 2.5 1.5; roughness: 0.6; metalness: 0;"
+                static-body
+                shadow="receive: true">
+            </a-plane>
+
+            <!-- Walls -->
+            <a-box 
+                position="0 2 -2.3" 
+                width="10" 
+                height="4" 
+                depth="0.2" 
+                material="src: #brick-color; repeat: 2.5 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+             <a-box 
+                position="-5 2 0.8" 
+                width="0.2" 
+                height="4" 
+                depth="6" 
+                material="src: #brick-color; repeat: 2.5 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+            <a-box 
+                position="5 2 -1.2" 
+                width="0.2" 
+                height="4" 
+                depth="6" 
+                material="src: #brick-color; repeat: 2.5 1; roughness: 0.7; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+             <a-entity 
+                position="4.8 0 2" 
+                rotation="0 160 0"
+                scale="4 3.4 1.6">
+                <a-entity 
+                    gltf-model="#doorway-front-model"
+                    shadow="cast: true; receive: false">
+                </a-entity>
+            </a-entity>
+            <a-entity
+    position="5.4 2.5 -1"
+    rotation="180 90 0"
+    scale="1 0.7 1"
+    shadow="cast: true; receive: true">
+<a-entity gltf-model="#Window2-black-open-1731-model"></a-entity>
+        </a-entity>
+    <a-entity
+    position="2.2 2.5 -2.8"
+    rotation="180 180 0"
+    scale="1 0.7 1"
+    shadow="cast: true; receive: true">
+<a-entity gltf-model="#Window2-black-open-1731-model"></a-entity>
+        </a-entity>
+    
+
+
+            <!-- Counter -->
+            <a-box 
+                position="0 0.3 -1.5" 
+                width="9" 
+                height="0.9" 
+                depth="0.8" 
+                color="#8b7355" 
+                material="roughness: 0.5; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+
+            <!-- Kitchen Sink (SCALED DOWN) -->
+            <a-entity 
+                position="-2 0.3 -1.5" 
+                scale="2 2 2"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#sink-model"></a-entity>
+            </a-entity>
+
+            <!-- Kitchen Stove (SCALED DOWN) -->
+            <a-entity 
+                position="1 0.3 -1.5" 
+                scale="2 2 2"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#stove-model"></a-entity>
+            </a-entity>
+
+            <!-- Refrigerator (SCALED DOWN) -->
+            <a-entity 
+                position="3.5 0.3 -1"
+                rotation="0 180 0"  
+                scale="2 2 2"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#fridge-model"></a-entity>
+            </a-entity>
+
+            <!-- Dining Set -->
+            <a-entity 
+                position="4.5 0.3 12"
+                rotation="0 90 0"  
+                scale="0.03 0.03 0.03"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Dining-Set-model"></a-entity>
+            </a-entity>
+
+
+
+            <!-- Ceiling Light -->
+            <a-cylinder 
+                position="0 3.3 0" 
+                radius="0.3" 
+                height="0.1" 
+                color="#e0e0e0" 
+                static-body>
+            </a-cylinder>
+            <a-light type="point" color="#fff" intensity="0.9" position="0 3.7 0"></a-light>
+        </a-entity>
+
+
+
+        <!-- ============================================ -->
+        <!-- SWIMMING POOL AREA (OUTSIDE VILLA) -->
+        <!-- ============================================ -->
+        <a-entity id="pool-container" position="0 0 -20">
+            <!-- Pool Basin -->
+            <a-box 
+                id="pool-floor" 
+                position="0 -0.3 0" 
+                width="15" 
+                height="0.3" 
+                depth="8" 
+                color="#1e3a8a" 
+                material="roughness: 0.3; metalness: 0.1;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+
+            <!-- Pool Walls -->
+            <a-box 
+                position="7.5 0 0" 
+                width="0.3" 
+                height="0.5" 
+                depth="8.3" 
+                color="#00bfff" 
+                material="roughness: 0.4; metalness: 0.2;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+            
+            <a-box 
+                position="-7.5 0 0" 
+                width="0.3" 
+                height="0.5" 
+                depth="8.3" 
+                color="#00bfff" 
+                material="roughness: 0.4; metalness: 0.2;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+            <a-box 
+                position="-0.21 0 4" 
+                width="15.3" 
+                height="0.5" 
+                depth="0.3" 
+                color="#00bfff" 
+                material="roughness: 0.4; metalness: 0.2;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+            <a-box 
+                position="0.21 0 -4" 
+                width="15.3" 
+                height="0.5" 
+                depth="0.3" 
+                color="#00bfff" 
+                material="roughness: 0.4; metalness: 0.2;"
+                static-body
+                shadow="cast: true; receive: true">
+            </a-box>
+
+            <!-- Water Surface -->
+           <!-- For animated water (add <script> for aframe-water in <head>) -->
+<a-entity id="water-surface"
+    geometry="primitive: plane; width: 15; height: 8"
+    rotation="-90 0 0"
+    position="0 0.05 0"
+    water="color: #0099ff; scale: 10 10; flowDirection: 1 0; distortionScale: 4; textureWidth: 1024; textureHeight: 1024">
+</a-entity>
+
+            <!-- Pool Deck -->
+            <a-plane 
+                position="0 0 0" 
+                rotation="-90 0 0" 
+                width="20" 
+                height="10" 
+                material="src: #tiles-133-color; repeat: 4 2; roughness: 0.7; metalness: 0;"
+                static-body
+                shadow="receive: true">
+            </a-plane>
+
+            <!-- Lounge Chairs (SCALED DOWN) -->
+            <a-entity 
+                position="8 0 6" 
+                scale="0.08 0.08 0.08"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#lounger-model"></a-entity>
+            </a-entity>
+            
+            <a-entity 
+                position="8 0 2" 
+                scale="0.08 0.08 0.08"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#lounger-model"></a-entity>
+            </a-entity>
+
+            <!-- Beach Ball (SCALED DOWN) -->
+            <a-entity 
+                position="1 0 -1" 
+                scale="5 5 5"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#beach-ball-model"></a-entity>
+            </a-entity>
+
+                     <!-- Beach Ball2 (SCALED DOWN) -->
+            <a-entity 
+                position="4 0 -1" 
+                scale="5 5 5"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#beach-ball-model"></a-entity>
+            </a-entity>
+                    <a-animation 
+                        attribute="position" 
+                        from="3 0.1 -20" 
+                        to="-3 0.1 -20" 
+                        dur="4000" 
+                        dir="alternate" 
+                        loop="true"
+                        easing="easeInOutSine">
+                    </a-animation>
+                
+
+            <!-- Rubber Duck (SCALED DOWN) -->
+            <a-entity 
+                position="-1.5 0.05 -1" 
+                scale="0.5 0.5 0.5"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#rubber-duck-model">
+                   <a-animation attribute="position" from="0 0 0" to="0 5 0"></a-animation>
+
+<a-entity animation="property: position; from: 0 0 0; to: 0 5 0; dur: 4000; loop: true"></a-entity>
+                </a-entity>
+            </a-entity>
+
+            <!-- Lamp Post (SCALED DOWN) -->
+            <a-entity 
+                position="-12 0 29" 
+                scale="0.4 0.4 0.4"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#lamppost-model"></a-entity>
+            </a-entity>
+            <a-light type="point" color="#ffeb3b" intensity="0.7" position="-8 3 -2"></a-light>
+
+             <a-entity 
+                position="12 0 29" 
+                scale="0.4 0.4 0.4"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#lamppost-model"></a-entity>
+            </a-entity>
+            <a-light type="point" color="#ffeb3b" intensity="0.7" position="-8 3 -2"></a-light>
+            <!-- Pool Light -->
+            <a-light type="point" color="#00ffff" intensity="0.6" position="0 0.5 0"></a-light>
+        </a-entity>
+
+        <!-- ============================================ -->
+        <!-- ENVIRONMENTAL ELEMENTS -->
+        <!-- ============================================ -->
+        
+        <!-- Trees (SCALED DOWN) -->
+        <a-entity id="trees">
+            <a-entity 
+                position="-25 0 10" 
+                scale="14 14 14"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#trees-model"></a-entity>
+            </a-entity>
+
+            <a-entity 
+                position="25 0 15" 
+                scale="5 5 5"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#trees-model"></a-entity>
+            </a-entity>
+
+            <a-entity 
+                position="-20 0 -35" 
+                scale="5 5 5"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#trees-model"></a-entity>
+            </a-entity>
+        </a-entity>
+         <a-entity id="tree">
+            <a-entity 
+                position="-25 0 20" 
+                scale="2 2 2"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#tree-model"></a-entity>
+            </a-entity>
+
+            <a-entity 
+                position="25 0 20" 
+                scale="2 2 2"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#tree-model"></a-entity>
+            </a-entity>
+
+            <a-entity 
+                position="-20 0 -40" 
+                scale="2 2 2"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#tree-model"></a-entity>
+            </a-entity>
+        </a-entity>
+        <a-entity 
+                position="20 0 -40" 
+                scale="2 2 2"
+                shadow="cast: true; receive: false">
+                <a-entity gltf-model="#tree-model"></a-entity>
+            </a-entity>
+        </a-entity>
+
+        <!-- dumster -->
+            <a-entity 
+                position="0.7 0.3 -11"
+                rotation="0 0 0"  
+                scale="0.5 0.6 0.5"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Garbage-model"></a-entity>
+            </a-entity>
+
+
+            <!-- Garden -->
+            <a-entity 
+                position="-19 0.3 1"
+                rotation="0 0 0"  
+                scale="0.6 0.6 0.6"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Garden-model"></a-entity>
+            </a-entity>
+
+            <!-- Summer Hut -->
+            <a-entity 
+                position="-18.5 2 1"
+                rotation="0 0 0"  
+                scale="2.5 2.5 2.5"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Gazebo-model"></a-entity>
+            </a-entity>
+
+             <!-- tank -->
+            <a-entity 
+                position="-18.5 2 -10"
+                rotation="0 0 0"  
+                scale="4 4 4"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Water-Tower-model"></a-entity>
+            </a-entity>
+
+            <!-- Bench -->
+            <a-entity 
+                position="-20 0.7 4"
+                rotation="0 0 0"  
+                scale="0.5 0.5 0.5"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Park-Bench-model"></a-entity>
+            </a-entity>
+
+            <!-- Pathway -->
+            <a-entity 
+                position="0 0 11"
+                rotation="0 0 0"  
+                scale="5 2.5 10"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#Path-Straight-model"></a-entity>
+            </a-entity>
+
+             
+
+             
+
+             
+
+
+
+        <!-- Vehicles (SCALED DOWN) -->
+        <a-entity id="vehicles">
+            <!-- Car (SCALED DOWN) -->
+            <a-entity 
+                position="4 0 11" 
+                scale="0.01 0.01 0.01"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#car-model"></a-entity>
+            </a-entity>
+
+            <!-- Motorcycle (SCALED DOWN) -->
+            <a-entity 
+                position="8 1 11" 
+                scale="0.3 0.3 0.3"
+                shadow="cast: true; receive: true">
+                <a-entity gltf-model="#motorcycle-model"></a-entity>
+            </a-entity>
+        </a-entity>
+
+        <!-- ============================================ -->
+        <!-- ANIMATIONS -->
+        <!-- ============================================ -->
+        <a-entity id="animations">
+            <!-- Water Wave Animation -->
+            <a-entity 
+                animation="property: position; from: 0 0.05 0; to: 0 0.15 0; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine"
